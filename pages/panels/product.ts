@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from "@playwright/test";
-import { ProductDataType } from "../../../data/products";
+import { ProductDataType } from "utils/data/products";
 
 export class Product {
   readonly page: Page;
@@ -18,20 +18,12 @@ export class Product {
     await this.page.goto("/inventory.html");
   }
 
-  async assertProduct({
-    item,
-    buttonType,
-  }: {
-    item: ProductDataType;
-    buttonType?: "add" | "remove";
-  }) {
+  async assertProduct({ item, buttonType }: { item: ProductDataType; buttonType?: "add" | "remove" }) {
     const product = this.inventoryItem.filter({ hasText: item.name });
     const itemName = product.getByTestId("inventory-item-name");
     const itemDescription = product.getByTestId("inventory-item-desc");
     const itemPrice = product.getByTestId("inventory-item-price");
-    const itemButton = product.getByTestId(
-      buttonType === "remove" ? /remove-.*/ : /add-to-cart-.*/
-    );
+    const itemButton = product.getByTestId(buttonType === "remove" ? /remove-.*/ : /add-to-cart-.*/);
     await expect(itemName).toBeVisible();
     await expect(itemName).toHaveText(item.name);
     await expect(itemDescription).toBeVisible();
@@ -39,9 +31,7 @@ export class Product {
     await expect(itemPrice).toBeVisible();
     await expect(itemPrice).toHaveText(`$${item.price}`);
     await expect(itemButton).toBeVisible();
-    await expect(itemButton).toHaveText(
-      buttonType === "remove" ? "Remove" : "Add to cart"
-    );
+    await expect(itemButton).toHaveText(buttonType === "remove" ? "Remove" : "Add to cart");
     if (this.type === "cart") {
       const quantity = product.getByTestId("item-quantity");
       await expect(quantity).toBeVisible();
@@ -49,17 +39,9 @@ export class Product {
     }
   }
 
-  async clickItemButton({
-    item,
-    buttonType,
-  }: {
-    item: ProductDataType;
-    buttonType: "add" | "remove";
-  }) {
+  async clickItemButton({ item, buttonType }: { item: ProductDataType; buttonType: "add" | "remove" }) {
     const product = this.inventoryItem.filter({ hasText: item.name });
-    const itemButton = product.getByTestId(
-      buttonType === "remove" ? /remove-.*/ : /add-to-cart-.*/
-    );
+    const itemButton = product.getByTestId(buttonType === "remove" ? /remove-.*/ : /add-to-cart-.*/);
     await itemButton.click();
   }
 

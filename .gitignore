@@ -8,3 +8,9 @@ node_modules/
 
 # misc
 .DS_Store
+
+# local env files
+.env.local
+
+# sessions
+.auth/

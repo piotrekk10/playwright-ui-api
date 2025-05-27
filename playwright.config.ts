@@ -1,4 +1,8 @@
+import dotenv from "dotenv";
+
 import { defineConfig, devices } from "@playwright/test";
+
+dotenv.config({ path: "./.env.local" });
 
 export default defineConfig({
   testDir: "./tests/",
@@ -8,7 +12,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: "html",
   use: {
-    baseURL: "https://www.saucedemo.com/",
+    baseURL: process.env.UI_TESTS_URL,
 
     trace: "on-first-retry",
 

@@ -1,6 +1,5 @@
 import { expect, Locator, Page } from "@playwright/test";
-import { UserDataType } from "../../data/users";
-import { ProductDataType } from "../../data/products";
+import { ProductDataType } from "utils/data/products";
 
 export class SummaryPage {
   readonly page: Page;
@@ -19,16 +18,10 @@ export class SummaryPage {
   constructor(page: Page) {
     this.page = page;
     this.checkoutSummary = this.page.getByTestId("checkout-summary-container");
-    this.paymentInfoLabel =
-      this.checkoutSummary.getByTestId("payment-info-label");
-    this.paymentInfoValue =
-      this.checkoutSummary.getByTestId("payment-info-value");
-    this.shippingInfoLabel = this.checkoutSummary.getByTestId(
-      "shipping-info-label"
-    );
-    this.shippingInfoValue = this.checkoutSummary.getByTestId(
-      "shipping-info-value"
-    );
+    this.paymentInfoLabel = this.checkoutSummary.getByTestId("payment-info-label");
+    this.paymentInfoValue = this.checkoutSummary.getByTestId("payment-info-value");
+    this.shippingInfoLabel = this.checkoutSummary.getByTestId("shipping-info-label");
+    this.shippingInfoValue = this.checkoutSummary.getByTestId("shipping-info-value");
     this.totalInfoLabel = this.checkoutSummary.getByTestId("total-info-label");
 
     this.subtotalInfo = this.checkoutSummary.getByTestId("subtotal-label");
@@ -50,16 +43,11 @@ export class SummaryPage {
     await expect(this.shippingInfoLabel).toBeVisible();
     await expect(this.shippingInfoLabel).toHaveText("Shipping Information:");
     await expect(this.shippingInfoValue).toBeVisible();
-    await expect(this.shippingInfoValue).toHaveText(
-      "Free Pony Express Delivery!"
-    );
+    await expect(this.shippingInfoValue).toHaveText("Free Pony Express Delivery!");
   }
 
   async assertPriceTotal(products: ProductDataType[]) {
-    const totalPrice = products.reduce(
-      (sum, product) => sum + product.price,
-      0
-    );
+    const totalPrice = products.reduce((sum, product) => sum + product.price, 0);
     const taxPrice = (totalPrice * 0.08).toFixed(2);
     await expect(this.totalInfoLabel).toBeVisible();
     await expect(this.totalInfoLabel).toHaveText("Price Total");
@@ -68,9 +56,7 @@ export class SummaryPage {
     await expect(this.taxInfo).toBeVisible();
     await expect(this.taxInfo).toHaveText(`Tax: $${taxPrice}`);
     await expect(this.totalInfoValue).toBeVisible();
-    await expect(this.totalInfoValue).toHaveText(
-      `Total: $${totalPrice + Number(taxPrice)}`
-    );
+    await expect(this.totalInfoValue).toHaveText(`Total: $${totalPrice + Number(taxPrice)}`);
   }
 
   async assertFinishButtonIsVisible() {

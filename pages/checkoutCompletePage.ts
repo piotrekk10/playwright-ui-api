@@ -8,9 +8,7 @@ export class CheckoutCompletePage {
 
   constructor(page: Page) {
     this.page = page;
-    this.checkoutComplete = this.page.getByTestId(
-      "checkout-complete-container"
-    );
+    this.checkoutComplete = this.page.getByTestId("checkout-complete-container");
     this.completeHeader = this.checkoutComplete.getByTestId("complete-header");
     this.completeText = this.checkoutComplete.getByTestId("complete-text");
   }

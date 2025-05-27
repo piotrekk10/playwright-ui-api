@@ -1,14 +1,8 @@
-import { RED_T_SHIRT, SAUCE_LABS_BACKPACK } from "@data/products";
-import { STANDARD_USER } from "@data/users";
-import {
-  CartPage,
-  CheckoutCompletePage,
-  CheckoutPage,
-  InventoryPage,
-  SummaryPage,
-} from "@pages";
-import { Header, Product } from "@panels";
+import { CartPage, CheckoutCompletePage, CheckoutPage, InventoryPage, SummaryPage } from "pages";
+import { Header, Product } from "pages/panels";
 import { test as _test } from "@playwright/test";
+import { STANDARD_USER } from "utils/data/users";
+import { RED_T_SHIRT, SAUCE_LABS_BACKPACK } from "utils/data/products";
 
 interface TestProps {
   cartItem: Product;
@@ -88,12 +82,7 @@ test.describe("Authenticated user", () => {
     await checkoutCompletePage.assertCheckoutComplete();
   });
 
-  test("should be able to remove product from the cart", async ({
-    cartItem,
-    header,
-    inventoryItem,
-    inventoryPage,
-  }) => {
+  test("should be able to remove product from the cart", async ({ cartItem, header, inventoryItem, inventoryPage }) => {
     await inventoryPage.goto();
     await inventoryItem.clickItemButton({
       item: RED_T_SHIRT,

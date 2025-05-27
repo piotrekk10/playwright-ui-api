@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from "@playwright/test";
-import { UserDataType } from "../../data/users";
+import { UserDataType } from "utils/data/users";
 
 export class CheckoutPage {
   readonly page: Page;

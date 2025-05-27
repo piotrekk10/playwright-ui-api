@@ -1,6 +1,6 @@
-import { UserDataType, USERS } from "@data/users";
-import { LoginPage } from "@pages";
+import { LoginPage } from "pages";
 import { Browser, chromium, Page, test as setup } from "@playwright/test";
+import { UserDataType, USERS } from "utils/data/users";
 
 setup("authenticate users", async () => {
   const browser = await chromium.launch({ headless: true });

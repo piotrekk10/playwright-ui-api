@@ -5,6 +5,11 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:
+
+env:
+  API_TESTS_URL: ${{ vars.API_TESTS_URL }}
+  UI_TESTS_URL: ${{ vars.UI_TESTS_URL }}
+
 jobs:
   test:
     timeout-minutes: 60

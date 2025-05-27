@@ -12,9 +12,7 @@ export class Header {
   }
 
   async assertShoppingCart(itemCount: number) {
-    const shoppingCartBadge = this.shoppingCart.getByTestId(
-      "shopping-cart-badge"
-    );
+    const shoppingCartBadge = this.shoppingCart.getByTestId("shopping-cart-badge");
     await expect(this.shoppingCart).toBeVisible();
     if (itemCount > 0) {
       await expect(shoppingCartBadge).toBeVisible();

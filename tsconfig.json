@@ -17,16 +17,6 @@
     "target": "esnext",
     "typeRoots": ["node_modules/@types"],
     "baseUrl": ".",
-    "paths": {
-      "@api/*": ["utils/models/api/*"],
-      "@assertions/*": ["utils/assertions/*"],
-      "@constants/*": ["utils/constants/*"],
-      "@core/*": ["core/*"],
-      "@data/*": ["utils/data/*"],
-      "@pages": ["utils/models/pages"],
-      "@panels": ["utils/models/pages/panels"],
-      "@schema/*": ["utils/schema/*"],
-    },
     "incremental": true
   },
   "exclude": ["node_modules", "public"],
