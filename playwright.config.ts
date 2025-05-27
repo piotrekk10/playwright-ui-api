@@ -52,5 +52,14 @@ export default defineConfig({
       },
       testMatch: /.*ui.spec.ts/,
     },
+    {
+      name: "API chromium",
+      use: {
+        ...devices["Desktop Chrome"],
+        viewport: { width: 1920, height: 1080 },
+        headless: true,
+      },
+      testMatch: /.*api.spec.ts/,
+    },
   ],
 });
