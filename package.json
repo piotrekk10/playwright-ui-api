@@ -23,6 +23,7 @@
     "*": "prettier --ignore-unknown --write"
   },
   "dependencies": {
-    "dotenv": "^16.4.7"
+    "dotenv": "^16.4.7",
+    "ajv": "^8.17.1"
   }
 }

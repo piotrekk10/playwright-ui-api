@@ -2,6 +2,8 @@ import { test as _test } from "@playwright/test";
 import { PostsAPIClient } from "api/clients/postsAPI";
 import { getDefaultAPIContext } from "api/contexts";
 import { PostResponse } from "api/models";
+import { postsSchema } from "api/schemas/postsSchema";
+import { validateSchema } from "api/schemas/validator";
 import { assertPost, assertPostCount } from "utils/assertions";
 import { expectStatusCode } from "utils/assertions/solutions";
 import { FIRST_POST, NEW_POST } from "utils/data/posts";
@@ -30,6 +32,7 @@ test("GET all posts", async ({ postsClient }) => {
   const json: PostResponse[] = await response.json();
   await expectStatusCode({ actual: response.status(), expected: 200, api: response.url() });
   await assertPostCount({ actualPosts: json, expectedCount: 100 });
+  await validateSchema({ schema: postsSchema, json });
 });
 
 test("GET post - resource not found", async ({ postsClient }) => {

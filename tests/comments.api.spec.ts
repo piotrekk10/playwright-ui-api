@@ -2,6 +2,8 @@ import { test as _test } from "@playwright/test";
 import { CommentsAPIClient } from "api/clients/commentsAPI";
 import { getDefaultAPIContext } from "api/contexts";
 import { CommentResponse } from "api/models";
+import { commentsSchema } from "api/schemas/commentsSchema";
+import { validateSchema } from "api/schemas/validator";
 import { assertComment, assertCommentCount } from "utils/assertions";
 import { expectStatusCode } from "utils/assertions/solutions";
 import { FIRST_COMMENT, NEW_COMMENT } from "utils/data/comments";
@@ -30,6 +32,7 @@ test("GET all comments", async ({ commentsClient }) => {
   const json: CommentResponse[] = await response.json();
   await expectStatusCode({ actual: response.status(), expected: 200, api: response.url() });
   await assertCommentCount({ actualComments: json, expectedCount: 500 });
+  await validateSchema({ schema: commentsSchema, json });
 });
 
 test("GET comment - resource not found", async ({ commentsClient }) => {
